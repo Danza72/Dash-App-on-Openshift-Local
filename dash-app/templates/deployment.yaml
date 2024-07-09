@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dash-app
+  labels:
+    app: dash-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dash-app
+  template:
+    metadata:
+      labels:
+        app: dash-app
+    spec:
+      containers:
+        - name: dash-app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: PG_HOST
+              value: "{{ .Values.postgres.host }}"
+            - name: PG_PORT
+              value: "{{ .Values.postgres.port }}"
+            - name: PG_DATABASE
+              value: "{{ .Values.postgres.database }}"
+            - name: PG_USER
+              value: "{{ .Values.postgres.username }}"
+            - name: PG_PASSWORD
+              value: "{{ .Values.postgres.password }}"
+          ports:
+            - containerPort: 8050

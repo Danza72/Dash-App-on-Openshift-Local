@@ -1,0 +1,17 @@
+image:
+  repository: zand72/dash-app
+  tag: latest
+
+postgres:
+  host: svc-postgres-headless
+  port: 5432
+  database: postgres-db
+  username: postgres-db
+  password: plschangeme
+
+service:
+  type: LoadBalancer
+  port: 8050
+
+ingress:
+  enabled: false

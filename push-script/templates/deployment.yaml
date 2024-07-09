@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: push-script
+  labels:
+    app: push-script
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: push-script
+  template:
+    metadata:
+      labels:
+        app: push-script
+    spec:
+      containers:
+        - name: push-script
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: PG_HOST
+              value: "{{ .Values.postgres.host }}"
+            - name: PG_PORT
+              value: "{{ .Values.postgres.port }}"
+            - name: PG_DATABASE
+              value: "{{ .Values.postgres.database }}"
+            - name: PG_USER
+              value: "{{ .Values.postgres.username }}"
+            - name: PG_PASSWORD
+              value: "{{ .Values.postgres.userPassword }}"
+            - name: TABLE
+              value: "{{ .Values.postgres.table }}"

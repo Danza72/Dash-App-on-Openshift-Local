@@ -1,0 +1,15 @@
+image:
+  repository: zand72/push-script
+  tag: latest
+
+postgres:
+  host: svc-postgres-headless
+  port: 5432
+  database: postgres-db
+  username: postgres-db
+  userPassword: plschangeme
+  superUserPassword: plschangemepls
+  table: resale_prices
+
+ingress:
+  enabled: false
